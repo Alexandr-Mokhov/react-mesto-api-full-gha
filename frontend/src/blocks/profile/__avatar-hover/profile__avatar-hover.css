@@ -1,0 +1,15 @@
+.profile__avatar-hover {
+  background-image: url(../../../images/add-avatar.svg);
+  background-size: 26px;
+  min-width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: .5s ease;
+}
+
+.profile__avatar-hover:hover {
+  background-color: #000;
+}

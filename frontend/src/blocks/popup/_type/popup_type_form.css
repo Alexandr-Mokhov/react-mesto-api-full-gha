@@ -1,0 +1,6 @@
+.popup_type_form {
+    height: 100%;
+    position: relative;
+    opacity: 1;
+    pointer-events: all;
+  }

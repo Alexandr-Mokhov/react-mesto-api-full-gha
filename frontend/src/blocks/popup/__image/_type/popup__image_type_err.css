@@ -1,0 +1,7 @@
+.popup__image_type_err {
+  background-image: url(../../../../images/err-auth.svg);
+  width: 120px;
+  height: 120px;
+  align-self: center;
+  margin: 32px 0 40px;
+}

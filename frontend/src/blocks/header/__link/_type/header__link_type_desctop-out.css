@@ -1,0 +1,11 @@
+.header__link_type_desctop-out {
+  color: rgba(169, 169, 169, 1);
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 600px) {
+  .header__link_type_desctop-out {
+    display: none;
+  }
+}

@@ -1,0 +1,14 @@
+.popup__save_type_form {
+  width: 358px;
+  color: rgba(0, 0, 0, 1);
+  background-color: #FFf;
+  margin-top: 20vh;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__save_type_form {
+    width: 100%;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

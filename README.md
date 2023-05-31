@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP 51.250.28.123
 
-Frontend https://...
+Frontend https://github.com/Alexandr-Mokhov/react-mesto-auth
 
-Backend https://...
+Backend https://github.com/Alexandr-Mokhov/express-mesto-gha

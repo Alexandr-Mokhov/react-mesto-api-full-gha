@@ -1,0 +1,32 @@
+.profile__info {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 920px) {
+  .profile__info {
+    max-width: calc(100vw - 430px);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__info {
+    max-width: calc(100vw - 270px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profile__info {
+    max-width: calc(100vw - 180px);
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile__info {
+    max-width: calc(100vw - 130px);
+  }
+}
+

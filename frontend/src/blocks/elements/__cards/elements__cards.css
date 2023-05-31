@@ -1,0 +1,30 @@
+.elements__cards {
+  list-style-type: none;
+  padding-left: 0;
+  width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 17px;
+  row-gap: 20px;
+}
+
+@media screen and (max-width: 920px) {
+    .elements__cards {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: calc(100% - 40px);
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .elements__cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .elements__cards {
+      grid-template-columns: 1fr;
+    }
+  }

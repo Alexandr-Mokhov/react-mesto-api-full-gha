@@ -1,0 +1,18 @@
+.header__menu {
+  display: none;
+}
+
+.header__menu_opened {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding-top: 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media screen and (min-width: 600px) {
+  .header__menu_opened {
+    display: none
+  }
+}
