@@ -41,5 +41,5 @@
   "devDependencies": {
     "gh-pages": "^5.0.0"
   },
-  "homepage": "https://alexandr-mokhov.github.io/react-mesto-auth/"
+  "homepage": "."
 }
