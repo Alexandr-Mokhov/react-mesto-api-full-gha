@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { isCelebrateError } = require('celebrate');
+const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
 const NotFoundError = require('./errors/NotFoundError');
@@ -10,6 +11,7 @@ const config = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+app.use(cors());
 const limiter = rateLimit(
   {
     windowMs: 10 * 60 * 1000,
