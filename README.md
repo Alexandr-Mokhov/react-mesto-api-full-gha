@@ -11,6 +11,6 @@
 
 IP 51.250.28.123
 
-Frontend https://github.com/Alexandr-Mokhov/react-mesto-auth
+Frontend https://mokhov.nomoredomains.rocks
 
-Backend https://github.com/Alexandr-Mokhov/express-mesto-gha
+Backend https://api.mokhov.nomoredomains.rocks
