@@ -5,7 +5,6 @@ function request(url, option) {
 }
 
 export const registerUser = ({ email, password }) => {
-  console.log(email, password);
   return request('/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
