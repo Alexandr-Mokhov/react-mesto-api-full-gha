@@ -1,7 +1,7 @@
 import checkResponse from './checkResponse';
 
 function request(url, option) {
-  return fetch(`api.mokhov.nomoredomains.rocks${url}`, option).then(checkResponse);
+  return fetch(`https://api.mokhov.nomoredomains.rocks${url}`, option).then(checkResponse);
 }
 
 export function getInitialCards() {

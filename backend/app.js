@@ -8,10 +8,9 @@ const router = require('./routes/index');
 const NotFoundError = require('./errors/NotFoundError');
 const BadRequestError = require('./errors/BadRequestError');
 const ConflictingRequestError = require('./errors/ConflictingRequestError');
-const config = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { mongodbLink } = process.env;
+const { mongodbLink, PORT } = process.env;
 
 const app = express();
 app.use(cors());
@@ -68,4 +67,4 @@ app.use((err, req, res, next) => {
 });
 
 // eslint-disable-next-line no-console
-app.listen(config.port, () => console.log(`Enabled port ${config.port}`));
+app.listen(PORT, () => console.log(`Enabled port ${PORT}`));
