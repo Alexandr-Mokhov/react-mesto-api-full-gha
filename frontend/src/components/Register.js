@@ -21,7 +21,7 @@ export default function Register({
       password: values['password']
     })
       .then((res) => {
-        if (res.data) {
+        if (res) {
           setNotificationText('Вы успешно зарегистрировались!');
           navigate('/sign-in', { replace: true });
           resetForm();

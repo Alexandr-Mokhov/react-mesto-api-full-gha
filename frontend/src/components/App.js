@@ -49,7 +49,7 @@ export default function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('token');
@@ -57,14 +57,32 @@ export default function App() {
     if (jwt) {
       checkToken(jwt)
         .then((res) => {
-          setEmailLogin(res.data.email);
+          setEmailLogin(res.email);
 
-          if (res.data) {
+          if (res) {
             setLoggedIn(true);
             navigate('/', { replace: true });
           } else {
             return Promise.reject(res.status);
           }
+
+          getUserInfo()
+          .then((userData) => {
+            setCurrentUser(userData);
+          })
+          .catch((err) => {
+            console.log(err + ` : Ошибка получения данных пользователя`);
+            handleErrorMessage('Сбой! Не получены данные пользователя.');
+          });
+
+          getInitialCards()
+          .then((cardData) => {
+            setCards(cardData);
+          })
+          .catch((err) => {
+            console.log(err + ` : Ошибка загрузки карточек`);
+            handleErrorMessage('Сбой! Карточки не загружены.');
+          });
         })
         .catch((err) => {
           console.log(err + ` : Ошибка с токеном`);
@@ -103,15 +121,6 @@ export default function App() {
     };
   }, [closeAllPopups]);
 
-  useEffect(() => {
-    getUserInfo()
-      .then(userData => setCurrentUser(userData))
-      .catch((err) => {
-        console.log(err + ` : Ошибка получения данных пользователя`);
-        handleErrorMessage('Сбой! Не получены данные пользователя.');
-      });
-  }, []);
-
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
   }
@@ -144,11 +153,10 @@ export default function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(itemLike => itemLike._id === currentUser._id);
-
+    const isLiked = card.likes.some(id => id === currentUser._id);
     changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((arrayItem) => arrayItem._id === card._id ? newCard : arrayItem));
+        setCards((state) => state.map((arrayItem) => arrayItem._id === card._id ? newCard : arrayItem))
       })
       .catch((err) => {
         console.log(err + ` : Ошибка с лайками`);
@@ -195,22 +203,11 @@ export default function App() {
       });
   }
 
-  useEffect(() => {
-    getInitialCards()
-      .then((cardData) => {
-        setCards(cardData);
-      })
-      .catch((err) => {
-        console.log(err + ` : Ошибка загрузки карточек`);
-        handleErrorMessage('Сбой! Карточки не загружены.');
-      });
-  }, []);
-
   function handleAddPlaceSubmit(cardData) {
     setIsLoading(true);
     addNewCard(cardData.namePlace, cardData.linkPlace)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([...cards, newCard]);
         closeAllPopups();
       })
       .catch((err) => {

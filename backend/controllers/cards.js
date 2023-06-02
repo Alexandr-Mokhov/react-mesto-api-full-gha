@@ -7,7 +7,6 @@ const {
 
 const getCards = (req, res, next) => {
   cardModel.find({})
-    .populate(['owner', 'likes'])
     .then((cards) => res.status(OK_STATUS).send(cards))
     .catch(next);
 };

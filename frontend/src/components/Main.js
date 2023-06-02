@@ -43,7 +43,8 @@ export default function Main({
                 onCardDelete={onCardDelete}
               />
             )
-          })}
+          }).reverse()
+          }
         </ul>
       </section>
     </main>

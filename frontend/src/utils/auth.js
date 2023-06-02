@@ -1,7 +1,7 @@
 import checkResponse from './checkResponse';
 
 function request(url, option) {
-  return fetch(`https://auth.nomoreparties.co${url}`, option).then(checkResponse);
+  return fetch(`http://localhost:3000${url}`, option).then(checkResponse);
 }
 
 export const registerUser = ({ email, password }) => {
@@ -20,12 +20,13 @@ export const authorizeUser = ({ email, password }) => {
   });
 }
 
-export const checkToken = (jwt) => {
+export const checkToken = () => {
+  const token = localStorage.getItem('token');
   return request('/users/me', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${jwt}`
+      'Authorization': `Bearer ${token}`
     }
   });
 }
