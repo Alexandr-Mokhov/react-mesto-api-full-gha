@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { react } from '@babel/types';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';

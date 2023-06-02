@@ -21,6 +21,7 @@ export default function Register({
       password: values['password']
     })
       .then((res) => {
+        console.log(res);
         if (res) {
           setNotificationText('Вы успешно зарегистрировались!');
           navigate('/sign-in', { replace: true });
