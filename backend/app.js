@@ -11,6 +11,8 @@ const ConflictingRequestError = require('./errors/ConflictingRequestError');
 const config = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const { mongodbLink } = process.env;
+
 const app = express();
 app.use(cors());
 const limiter = rateLimit(
@@ -22,7 +24,7 @@ const limiter = rateLimit(
   },
 );
 
-mongoose.connect(config.mongodbLink);
+mongoose.connect(mongodbLink);
 
 app.use(requestLogger);
 app.use(limiter);
