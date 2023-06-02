@@ -9,8 +9,7 @@ const NotFoundError = require('./errors/NotFoundError');
 const BadRequestError = require('./errors/BadRequestError');
 const ConflictingRequestError = require('./errors/ConflictingRequestError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const { mongodbLink, PORT } = process.env;
+const config = require('./config');
 
 const app = express();
 app.use(cors());
@@ -23,7 +22,7 @@ const limiter = rateLimit(
   },
 );
 
-mongoose.connect(mongodbLink);
+mongoose.connect(config.mongodbLink);
 
 app.use(requestLogger);
 app.use(limiter);
@@ -40,16 +39,6 @@ app.use(errors()); // для вывода стандартных ошибок о
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   let error = err;
-
-  // Для вывода ошибок от Joi в стиле остальных ошибок
-  // if (isCelebrateError(err)) {
-  //   error.statusCode = 400;
-  //   if (err.details.get('body')) {
-  //     error.message = err.details.get('body').details[0].message;
-  //   } else {
-  //     error.message = err.details.get('params').details[0].message;
-  //   }
-  // }
 
   if (err.code === 11000) {
     error = new ConflictingRequestError('Такой E-mail уже зарегистрирован.');
@@ -68,4 +57,4 @@ app.use((err, req, res, next) => {
 });
 
 // eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`Enabled port ${PORT}`));
+app.listen(config.port, () => console.log(`Enabled port ${config.port}`));
