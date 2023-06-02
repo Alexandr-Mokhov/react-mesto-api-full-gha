@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const { isCelebrateError } = require('celebrate');
+const { errors } = require('celebrate');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
@@ -35,20 +35,21 @@ app.get('/crash-test', () => {
 });
 app.use(router);
 app.use(errorLogger);
-// app.use(errors()); // для вывода стандартных ошибок от Joi
+app.use(errors()); // для вывода стандартных ошибок от Joi
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   let error = err;
 
-  if (isCelebrateError(err)) {
-    error.statusCode = 400;
-    if (err.details.get('body')) {
-      error.message = err.details.get('body').details[0].message;
-    } else {
-      error.message = err.details.get('params').details[0].message;
-    }
-  }
+  // Для вывода ошибок от Joi в стиле остальных ошибок
+  // if (isCelebrateError(err)) {
+  //   error.statusCode = 400;
+  //   if (err.details.get('body')) {
+  //     error.message = err.details.get('body').details[0].message;
+  //   } else {
+  //     error.message = err.details.get('params').details[0].message;
+  //   }
+  // }
 
   if (err.code === 11000) {
     error = new ConflictingRequestError('Такой E-mail уже зарегистрирован.');
