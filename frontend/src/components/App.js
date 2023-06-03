@@ -48,6 +48,7 @@ export default function App() {
 
   useEffect(() => {
     tokenCheck();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   const tokenCheck = () => {
@@ -103,6 +104,7 @@ export default function App() {
         document.removeEventListener('keydown', closeByEscape);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   useEffect(() => {
@@ -118,6 +120,7 @@ export default function App() {
     return () => {
       document.removeEventListener('mousedown', handleClickOverlay);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closeAllPopups]);
 
   function handleEditProfileClick() {

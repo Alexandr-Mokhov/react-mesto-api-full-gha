@@ -4,34 +4,26 @@ function request(url, option) {
   return fetch(`https://api.mokhov.nomoredomains.rocks${url}`, option).then(checkResponse);
 }
 
-export function getInitialCards() {
+function setHeaders() {
   const token = localStorage.getItem('token');
-  return request('/cards', { 
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-  })
+  return { 
+    'Authorization': `Bearer ${token}`, 
+    'Content-Type': 'application/json' 
+  };
+}
+
+export function getInitialCards() {
+  return request('/cards', { headers: setHeaders() })
 };
 
 export function getUserInfo() {
-  const token = localStorage.getItem('token');
-  return request('/users/me', { 
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-  })
+  return request('/users/me', { headers: setHeaders() })
 }
 
 export function setUserInfo(userNameData, dataUserAbout) {
-  const token = localStorage.getItem('token');
   return request('/users/me', {
     method: 'PATCH',
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
+    headers: setHeaders(),
     body: JSON.stringify({
       name: userNameData,
       about: dataUserAbout
@@ -40,13 +32,9 @@ export function setUserInfo(userNameData, dataUserAbout) {
 }
 
 export function setUserAvatar(dataAvatar) {
-  const token = localStorage.getItem('token');
   return request('/users/me/avatar', {
     method: 'PATCH',
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
+    headers: setHeaders(),
     body: JSON.stringify({
       avatar: dataAvatar
     })
@@ -54,13 +42,9 @@ export function setUserAvatar(dataAvatar) {
 }
 
 export function addNewCard(nameCard, linkCard) {
-  const token = localStorage.getItem('token');
   return request('/cards', {
     method: 'POST',
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
+    headers: setHeaders(),
     body: JSON.stringify({
       name: nameCard,
       link: linkCard
@@ -69,23 +53,15 @@ export function addNewCard(nameCard, linkCard) {
 }
 
 export function deleteUserCard(cardId) {
-  const token = localStorage.getItem('token');
   return request(`/cards/${cardId}`, {
     method: 'DELETE',
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
+    headers: setHeaders(),
   });
 }
 
 export function changeLikeCardStatus(cardId, noLike) {
-  const token = localStorage.getItem('token');
   return request(`/cards/${cardId}/likes`, {
     method: `${noLike ? 'PUT' : 'DELETE'}`,
-    headers: { 
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
+    headers:  setHeaders(),
   });
 }
