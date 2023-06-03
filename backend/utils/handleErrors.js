@@ -5,11 +5,9 @@ const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
 
 function handleErrors(err) {
-  if (err instanceof AuthorisationError) {
-    return err;
-  }
-
-  if (err instanceof ForbiddenError) {
+  if (err instanceof AuthorisationError
+    || err instanceof ForbiddenError
+    || err instanceof NotFoundError) {
     return err;
   }
 
