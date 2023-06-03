@@ -1,8 +1,14 @@
-const NotFoundError = require('../errors/NotFoundError');
+const AuthorisationError = require('../errors/AuthorisationError');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictingRequestError = require('../errors/ConflictingRequestError');
+const ForbiddenError = require('../errors/ForbiddenError');
+const NotFoundError = require('../errors/NotFoundError');
 
 function handleErrors(err) {
+  if (err instanceof AuthorisationError || ForbiddenError) {
+    return err;
+  }
+
   if (err.code === 11000) {
     return new ConflictingRequestError('Такой E-mail уже зарегистрирован.');
   }
