@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-// const { errors } = require('celebrate');
+const { errors } = require('celebrate');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
@@ -32,7 +32,7 @@ app.get('/crash-test', () => {
 });
 app.use(router);
 app.use(errorLogger);
-// app.use(errors()); // для вывода стандартных ошибок от Joi
+app.use(errors()); // для вывода стандартных ошибок от Joi
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
