@@ -5,9 +5,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
-const NotFoundError = require('./errors/NotFoundError');
-const BadRequestError = require('./errors/BadRequestError');
-const ConflictingRequestError = require('./errors/ConflictingRequestError');
+const handleErrors = require('./utils/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const config = require('./config');
 
@@ -16,7 +14,7 @@ app.use(cors());
 const limiter = rateLimit(
   {
     windowMs: 10 * 60 * 1000,
-    max: 1000,
+    max: 200,
     standardHeaders: true,
     legacyHeaders: false,
   },
@@ -38,21 +36,7 @@ app.use(errors()); // для вывода стандартных ошибок о
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  let error = err;
-
-  if (err.code === 11000) {
-    error = new ConflictingRequestError('Такой E-mail уже зарегистрирован.');
-  }
-
-  if (err.name === 'DocumentNotFoundError') {
-    error = new NotFoundError('Ресурс с указанным id не найден.');
-  }
-
-  if (err.name === 'ValidationError' || err.name === 'CastError') {
-    error = new BadRequestError('Переданы некорректные данные.');
-  }
-
-  const { statusCode = 500, message } = error;
+  const { statusCode, message } = handleErrors(err);
   res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
 });
 
