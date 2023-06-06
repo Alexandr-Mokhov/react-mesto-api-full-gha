@@ -25,11 +25,6 @@ mongoose.connect(config.mongodbLink);
 app.use(requestLogger);
 app.use(limiter);
 app.use(express.json());
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
 app.use(router);
 app.use(errorLogger);
 app.use(errors()); // для вывода стандартных ошибок от Joi
