@@ -2,15 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
 const handleErrors = require('./utils/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const config = require('./config');
+const { corsMiddlewares } = require('./middlewares/corsMiddlewares');
 
 const app = express();
-app.use(cors());
+app.use(corsMiddlewares); // app.use(cors()); для открытия всем доменам
 const limiter = rateLimit(
   {
     windowMs: 10 * 60 * 1000,

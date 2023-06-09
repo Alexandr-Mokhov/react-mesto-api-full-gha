@@ -1,6 +1,6 @@
 import checkResponse from './checkResponse';
 
-function request(url, option) {
+function request(url, option) { // для локальной разработки использовать http://localhost:3000
   return fetch(`https://api.mokhov.nomoredomains.rocks${url}`, option).then(checkResponse);
 }
 
